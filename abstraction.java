@@ -8,6 +8,7 @@ abstract class Animal {
 }
 
 class Dog extends Animal {
+    @Override
     void makeSound() {
         System.out.println("barks");
     }
@@ -19,4 +20,5 @@ public class Main {
         an.makeSound();
         an.sleeping();
     }
+
 }
