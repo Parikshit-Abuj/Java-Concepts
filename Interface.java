@@ -158,3 +158,57 @@ public class SCInterface1 {
         s.inviteSale();
     }
 }
+
+//DOS AND DONTS INTERFACE
+interface Test
+{
+    final static int x = 10;   // by default public static final
+
+    public abstract void meth1();
+    public abstract void meth2();
+
+    public static void meth3()
+    {
+        System.out.println("Meth3 of Test");
+    }
+
+    private void meth6()   // useful only inside interface
+    {
+        System.out.println("meth6");
+    }
+
+    default void meth5()   // used to update existing interfaces
+    {
+        meth6();
+        System.out.println("Meth5 of Test");
+    }
+}
+
+interface Test2 extends Test
+{
+    void meth4();
+}
+
+class My implements Test2
+{
+    @Override
+    public void meth1(){}
+
+    @Override
+    public void meth2(){}
+
+    @Override
+    public void meth4(){}
+}
+
+public class InterfacePra
+{
+    public static void main(String[] args)
+    {
+        System.out.println(Test.x);   // correct (small x)
+        Test.meth3();
+
+        My m = new My();
+        m.meth5();
+    }
+}
