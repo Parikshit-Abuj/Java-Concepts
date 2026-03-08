@@ -67,3 +67,127 @@ public class Main{
 		    System.out.println("Bye");
 	}
 }
+
+//UNCHECKED EXCEPTION
+public class Unchecked{
+static void fun1()
+{
+    try
+    {
+        System.out.println(10/0);
+    }
+    catch(Exception e)
+    {
+        System.out.println(e.getMessage());
+    }
+}
+}
+
+//CHECKED EXCEPTION
+import java.io.*;
+
+class Test
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            FileReader fr = new FileReader("test.txt");
+            System.out.println("File opened");
+        }
+        catch(IOException e)
+        {
+            System.out.println("File not found");
+        }
+    }
+}
+
+//PROPAGATION OF EXCEPTION
+class Test
+{
+    static void fun1()
+    {
+        System.out.println(10/0);   // ArithmeticException
+    }
+
+    static void fun2()
+    {
+        fun1();   // exception comes here
+    }
+
+    static void fun3()
+    {
+        try
+        {
+            fun2();   // exception propagates here
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception handled");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        fun3();
+    }
+}
+
+//THROW
+class Test
+{
+    public static void main(String[] args)
+    {
+        int age = 15;
+
+        if(age < 18)
+        {
+            throw new ArithmeticException("Not eligible to vote");
+        }
+
+        System.out.println("You can vote");
+    }
+}
+
+//THROWS
+class Test
+{
+    static void divide() throws ArithmeticException
+    {
+        int a = 10, b = 0;
+        int c = a / b;   // exception occurs
+        System.out.println(c);
+    }
+
+    public static void main(String[] args)
+    {
+        try
+        {
+            divide();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception handled");
+        }
+    }
+}
+
+//finally
+class Test
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            int a = 10 / 0;   // causes exception
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception caught");
+        }
+        finally
+        {
+            System.out.println("Finally block executed");
+        }
+    }
+}
