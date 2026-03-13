@@ -89,3 +89,28 @@ public class ThreadExample {
         t1.interrupt();
     }
 }
+
+//Thread methods
+class MyThread extends Thread
+{
+    public MyThread(String name)
+    {
+        super(name);
+        setPriority(Thread.MIN_PRIORITY+2);
+    }
+}
+
+public class ThreadTest
+{
+    public static void main(String[] args) throws Exception
+    {
+        MyThread t = new MyThread("My Thread 1");
+
+        System.out.println("ID " + t.getId());
+        System.out.println("Name " + t.getName());
+        System.out.println("Just we have created new object.");
+        t.start();
+        System.out.println("State " + t.getState());
+        System.out.println("Alive " + t.isAlive());
+    }
+}
