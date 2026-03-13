@@ -114,3 +114,44 @@ public class ThreadTest
         System.out.println("Alive " + t.isAlive());
     }
 }
+
+//Daemon + join() + yield()
+class MyThread extends Thread {
+
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+
+            System.out.println(Thread.currentThread().getName() + " running : " + i);
+
+            // give chance to other thread
+            Thread.yield();
+
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+public class ThreadExample {
+
+    public static void main(String[] args) throws Exception {
+
+        MyThread t1 = new MyThread();
+        MyThread t2 = new MyThread();
+        MyThread daemonThread = new MyThread();
+
+        // setting daemon thread
+        daemonThread.setDaemon(true);
+
+        t1.start();
+        t1.join();     // main waits for t1 to finish
+
+        t2.start();
+        daemonThread.start();
+
+        System.out.println("Main thread finished");
+    }
+}
